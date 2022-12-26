@@ -1,18 +1,24 @@
 import React from 'react'
+import moment from 'moment'
+import { DATE_FORMAT } from '../../constants/date.constants'
 
-const AppCard = () => {
+const AppCard = (props) => {
+  const {
+    data,
+    onClick
+  } = props
   return (
-    <div className="app-card">
+    <div className="app-card" onClick={onClick}>
       <div className='app-card--image'>
-        <img src="https://picsum.photos/200/300" className="card-img-top" alt="..." />
+        <img src={data.EventImageUrl} alt={data.EventTitle} />
         <div className='app-card--overlay'>
-          <span>21 Jul</span>
+          <span>{moment(data.DispReleaseDate).format(DATE_FORMAT)}</span>
           <i className='fas fa-play-circle' />
         </div>
       </div>
       <div className="app-card--content">
-        <div className="app-card--title">Card title</div>
-        <div className="app-card--subtitle">English</div>
+        <div className="app-card--title">{data.EventTitle}</div>
+        <div className="app-card--subtitle">{data.EventLanguage}</div>
       </div>
     </div>
   )
