@@ -1,0 +1,71 @@
+:root {
+  --primary-color: #f84464;
+  --secondary-color: #f3f3f3;
+  --tertiary-color: #49ba8e;
+  --quaternary-color: #ccc;
+  --black-color: #000000;
+  --white-color: #ffffff;
+  --opacity: 0.5;
+  --opacity-2: 0.2;
+  --opacity-3: 0.8;
+  --border-radius: 4px;
+  --font-size: 16px;
+  --font-size-2: 14px;
+  --font-size-3: 12px;
+}
+
+/* Button */
+
+.app-button {
+  display: inline-block;
+  padding: 10px 20px;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-2);
+  font-weight: 500;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.app-button--primary {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+}
+
+.app-button--primary.app-button--small {
+  padding: 10px 20px;
+  font-size: var(--font-size-3);
+  letter-spacing: 0px;
+}
+
+.app-button--primary.app-button--large {
+  padding: 10px 30px;
+  font-size: var(--font-size);
+  letter-spacing: 2px;
+}
+
+.app-button--secondary {
+  background-color: var(--secondary-color);
+  color: var(--quaternary-color);
+}
+
+.app-button--secondary.app-button--small {
+  padding: 10px 20px;
+  font-size: var(--font-size-3);
+  letter-spacing: 0px;
+}
+
+.app-button--secondary.app-button--large {
+  padding: 10px 30px;
+  font-size: var(--font-size);
+  letter-spacing: 2px;
+}
+
+.app-button--secondary:hover {
+  color: var(--primary-color);
+  border: 1px solid var(--secondary-color);
+}
