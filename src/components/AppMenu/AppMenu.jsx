@@ -1,4 +1,5 @@
 import React from 'react'
+import AppCheckbox from '../AppCheckbox/AppCheckbox';
 
 const AppMenu = (props) => {
   const {
@@ -26,13 +27,8 @@ const AppMenu = (props) => {
             key={index}
             onClick={onClick}
             value={option.value}
-            className={checkbox ? 'app-checkbox' : 'app-menu--item'}
           >
-            {checkbox && <>
-              <i className='app-checkbox--checkmark' />
-              <input type='checkbox' onChange={handleCheckbox} value={option.value} />
-            </>
-            }
+            {checkbox && <AppCheckbox handleCheckbox={handleCheckbox} />}
             <span>
               {option.label}
             </span>

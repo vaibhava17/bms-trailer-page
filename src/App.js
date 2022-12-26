@@ -1,5 +1,6 @@
 import './assets/css/App.css';
 import AppButton from './components/AppButton/AppButton';
+import AppCard from './components/AppCard/AppCard';
 import AppDropdown from './components/AppDropdown/AppDropdown';
 
 let dummy = [
@@ -27,6 +28,19 @@ function App() {
       <AppDropdown
         options={dummy}
       />
+      <br />
+      <br />
+      <br />
+      <div style={{
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '25%',
+        gap: '10px',
+        padding: '10px'
+      }}>
+        <AppCard />
+      </div>
     </div>
   );
 }
