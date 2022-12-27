@@ -7,7 +7,8 @@ const AppCard = (props) => {
     data,
     onClick,
     ...otherProps
-  } = props
+  } = props;
+
   return (
     <div className="app-card" onClick={onClick} {...otherProps}>
       <div className='app-card--image'>

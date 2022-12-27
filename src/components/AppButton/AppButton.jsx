@@ -14,11 +14,13 @@ const AppButton = (props) => {
     ...rest
   } = props
 
+  // primary or secondary
   let finalClassName = 'app-button--primary'
   if (secondary) {
     finalClassName = 'app-button--secondary'
   }
 
+  // size
   if (size === 'small') {
     finalClassName = `${finalClassName} app-button--small`
   } else if (size === 'large') {

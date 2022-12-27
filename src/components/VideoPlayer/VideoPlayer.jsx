@@ -1,5 +1,5 @@
 import React from 'react'
-
+// TODO - Add a prop to hide the video details and responsive
 const VideoPlayer = () => {
   return (
     <div className='app-video-player'>

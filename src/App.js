@@ -6,9 +6,11 @@ import AppCard from './components/AppCard/AppCard';
 import AppDropdown from './components/AppDropdown/AppDropdown';
 import AppLoader from './components/AppLoader/AppLoader';
 import AppTag from './components/AppTag/AppTag';
+import VideoPlayer from './components/VideoPlayer/VideoPlayer';
 import { get } from './utils/api';
 import { API_URL, DEBOUNCE_TIME } from './constants';
-import VideoPlayer from './components/VideoPlayer/VideoPlayer';
+
+// TODO: card on click should open video player
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -18,11 +20,13 @@ function App() {
   const [movies, setMovies] = useState([]);
   const [LanguageList, setLanguageList] = useState([]);
 
+  // Debounce search with 500ms
   const debounceSearch = useCallback(debounce(value => {
     setSearchValue(value);
     setLoading(true);
   }, DEBOUNCE_TIME), []);
 
+  // Fetch data from API
   useEffect(() => {
     setLoading(true);
     get(API_URL).then((data) => {
@@ -36,6 +40,7 @@ function App() {
     });
   }, []);
 
+  // Filter movies based on search value
   useEffect(() => {
     let filteredMovies = movies.filter((movie) => {
       return movie.EventName.toLowerCase().includes(searchValue.toLowerCase());
@@ -44,6 +49,7 @@ function App() {
     setLoading(false);
   }, [searchValue, movies]);
 
+  // Filter movies based on selected language
   useEffect(() => {
     if (selectedLanguage.length > 0) {
       let filteredMovies = movies.filter((movie) => {
@@ -55,6 +61,7 @@ function App() {
     }
   }, [selectedLanguage, movies]);
 
+  // Map language list to dropdown options
   let languageOptions = LanguageList.map((language) => {
     return { value: language, label: language };
   });

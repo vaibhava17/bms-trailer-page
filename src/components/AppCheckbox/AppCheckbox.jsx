@@ -1,7 +1,8 @@
 import React from 'react'
 
 const AppCheckbox = (props) => {
-  const { values = [], value, onChange } = props
+  const { values = [], value, onChange } = props;
+  
   return (
     <div className="app-checkbox">
       <i className='app-checkbox--checkmark' />

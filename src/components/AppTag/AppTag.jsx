@@ -1,7 +1,8 @@
 import React from 'react'
 
 const AppTag = (props) => {
-  const { label = "Tag", onClick, ...rest } = props
+  const { label = "Tag", onClick, ...rest } = props;
+  
   return (
     <div className="app-tag" onClick={() => onClick(label)} {...rest}>
       <div className="app-tag--content">

@@ -14,6 +14,7 @@ const AppMenu = (props) => {
 
   let finalClassName = 'app-menu'
 
+  // size
   if (size === 'small') {
     finalClassName = `${finalClassName} app-menu--small`
   } else if (size === 'large') {

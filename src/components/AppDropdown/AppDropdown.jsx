@@ -16,12 +16,14 @@ const AppDropdown = (props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [values, setValues] = useState([])
 
+  // toggle dropdown
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
   }
 
   let finalClassName = 'app-dropdown'
 
+  // size
   if (size === 'small') {
     finalClassName = `${finalClassName} app-dropdown--small`
   } else if (size === 'large') {
@@ -32,7 +34,6 @@ const AppDropdown = (props) => {
       <button
         className={`app-dropdown--header ${isOpen ? "active" : ""}`}
         onMouseEnter={toggleDropdown}
-        onMouseDown={toggleDropdown}
         disabled={disabled}
         {...rest}
       >
