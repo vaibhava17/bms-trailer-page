@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Navbar = (props) => {
-  const { onSearch } = props
+  const { onSearch, ...rest } = props
   return (
     <nav className="navbar">
       <div className="container">
@@ -15,6 +15,7 @@ const Navbar = (props) => {
             placeholder="Search"
             className='search__input'
             onChange={(e) => onSearch(e.target.value)}
+            {...rest}
           />
         </div>
         {/* menu */}

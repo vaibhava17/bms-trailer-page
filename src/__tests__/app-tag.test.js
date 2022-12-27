@@ -1,8 +1,8 @@
 import React from 'react';
-import { screen, render, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import AppTag from '../components/AppTag/AppTag';
 
-test("testing if the button is clicked", () => {
+test("testing if the tag is clicked", () => {
   const tagClickTester = jest.fn();
 
   const { getByTestId } = render(
