@@ -4,16 +4,16 @@ import AppMenu from '../AppMenu/AppMenu';
 const AppDropdown = (props) => {
   const {
     options = [],
-    value = '',
     onChange = () => { },
     placeholder = 'Select',
     className = '',
     menuClassName = '',
     disabled = false,
-    checkbox = true,
+    checkbox = false,
     size = 'small'
   } = props;
   const [isOpen, setIsOpen] = useState(false)
+  const [values, setValues] = useState([])
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen)
@@ -34,7 +34,11 @@ const AppDropdown = (props) => {
         onMouseDown={toggleDropdown}
         disabled={disabled}
       >
-        {value || placeholder}
+        <div className='app-dropdown--text'>
+        <span>
+          {values.length > 0 ? values.join() : placeholder}
+        </span>
+        </div>
         <i className='fas fa-chevron-down' />
       </button>
       <div className={`app-dropdown--body ${isOpen ? "app-dropdown--body--active" : ""}`}>
@@ -42,7 +46,14 @@ const AppDropdown = (props) => {
           className={menuClassName}
           size={size}
           options={options}
-          onClick={onChange}
+          onClick={(e, option) => {
+            if (values.includes(option.label)) {
+              setValues(values.filter(value => value !== option.label))
+            } else {
+              setValues([...values, option.label])
+            }
+            onChange(e, option)
+          }}
           checkbox={checkbox}
         />
       </div>

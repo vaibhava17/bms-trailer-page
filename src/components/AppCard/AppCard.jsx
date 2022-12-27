@@ -1,6 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-import { DATE_FORMAT } from '../../constants/date.constants'
+import { DATE_FORMAT } from '../../constants'
 
 const AppCard = (props) => {
   const {
@@ -10,7 +10,7 @@ const AppCard = (props) => {
   return (
     <div className="app-card" onClick={onClick}>
       <div className='app-card--image'>
-        <img src={data.EventImageUrl} alt={data.EventTitle} />
+        <img src={data.EventImageUrl} alt={data.EventTitle} className="app-card--image-placeholder" />
         <div className='app-card--overlay'>
           <span>{moment(data.DispReleaseDate).format(DATE_FORMAT)}</span>
           <i className='fas fa-play-circle' />

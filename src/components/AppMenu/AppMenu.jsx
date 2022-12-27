@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AppCheckbox from '../AppCheckbox/AppCheckbox';
 
 const AppMenu = (props) => {
@@ -7,9 +7,9 @@ const AppMenu = (props) => {
     size = 'small',
     checkbox = false,
     className = '',
-    handleCheckbox = () => { },
     onClick = () => { },
   } = props;
+  const [checkedValues, setCheckedValues] = useState([])
 
   let finalClassName = 'app-menu'
 
@@ -25,10 +25,23 @@ const AppMenu = (props) => {
         return (
           <li
             key={index}
-            onClick={onClick}
+            onClick={(e) => {
+              onClick(e, option)
+              if (checkbox) {
+                if (checkedValues.includes(option.value)) {
+                  setCheckedValues(checkedValues.filter(value => value !== option.value))
+                } else {
+                  setCheckedValues([...checkedValues, option.value])
+                }
+              }
+            }}
             value={option.value}
           >
-            {checkbox && <AppCheckbox handleCheckbox={handleCheckbox} />}
+            {checkbox &&
+              <AppCheckbox
+                values={checkedValues}
+                value={option.value}
+              />}
             <span>
               {option.label}
             </span>

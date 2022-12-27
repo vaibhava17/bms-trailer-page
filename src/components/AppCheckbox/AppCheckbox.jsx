@@ -1,10 +1,15 @@
 import React from 'react'
 
-const AppCheckbox = () => {
+const AppCheckbox = (props) => {
+  const { values = [], value } = props
   return (
     <div className="app-checkbox">
       <i className='app-checkbox--checkmark' />
-      <input type='checkbox' />
+      <input
+        type='checkbox'
+        value={value}
+        checked={values.includes(value)}
+      />
     </div>
   )
 }
