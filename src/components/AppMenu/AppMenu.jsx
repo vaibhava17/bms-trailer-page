@@ -8,6 +8,7 @@ const AppMenu = (props) => {
     checkbox = false,
     className = '',
     onClick = () => { },
+    ...rest
   } = props;
   const [checkedValues, setCheckedValues] = useState([])
 
@@ -20,7 +21,7 @@ const AppMenu = (props) => {
   }
 
   return (
-    <ul className={`${finalClassName} ${className}`}>
+    <ul className={`${finalClassName} ${className}`} {...rest}>
       {options.map((option, index) => {
         return (
           <li
