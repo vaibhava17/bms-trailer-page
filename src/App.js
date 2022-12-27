@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useCallback } from 'react';
+import { debounce } from 'lodash';
 import './assets/css/App.css';
 import Navbar from './components/Navbar/Navbar';
 import AppCard from './components/AppCard/AppCard';
 import AppDropdown from './components/AppDropdown/AppDropdown';
 import AppLoader from './components/AppLoader/AppLoader';
+import AppTag from './components/AppTag/AppTag';
 import { get } from './utils/api';
 import { API_URL, DEBOUNCE_TIME } from './constants';
-import { debounce } from 'lodash';
-import AppTag from './components/AppTag/AppTag';
+import VideoPlayer from './components/VideoPlayer/VideoPlayer';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -91,6 +92,7 @@ function App() {
             checkbox
           />
         </div>
+        <VideoPlayer />
         <div className="flex-grid">
           {loading ? <AppLoader /> : (displayMovies.length > 0 ? displayMovies.map((movie, index) => {
             return (
