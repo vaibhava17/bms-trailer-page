@@ -1,4 +1,4 @@
-let movies = [
+export const movies = [
   {
     "EventGroup": "EG00071990",
     "EventTitle": "Notebook",
@@ -157,6 +157,4 @@ let movies = [
     "wtsPerc": 100,
     "trailerType": "cs"
   },
-]
-
-export default movies;
+];

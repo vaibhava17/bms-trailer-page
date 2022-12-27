@@ -10,7 +10,8 @@ const AppDropdown = (props) => {
     menuClassName = '',
     disabled = false,
     checkbox = false,
-    size = 'small'
+    size = 'small',
+    ...rest
   } = props;
   const [isOpen, setIsOpen] = useState(false)
   const [values, setValues] = useState([])
@@ -29,19 +30,23 @@ const AppDropdown = (props) => {
   return (
     <div className={`${finalClassName} ${className}`}>
       <button
-        className='app-dropdown--header'
+        className={`app-dropdown--header ${isOpen ? "active" : ""}`}
         onMouseEnter={toggleDropdown}
         onMouseDown={toggleDropdown}
         disabled={disabled}
+        {...rest}
       >
         <div className='app-dropdown--text'>
-        <span>
-          {values.length > 0 ? values.join() : placeholder}
-        </span>
+          <span>
+            {values.length > 0 ? values.join() : placeholder}
+          </span>
         </div>
         <i className='fas fa-chevron-down' />
       </button>
-      <div className={`app-dropdown--body ${isOpen ? "app-dropdown--body--active" : ""}`}>
+      <div
+        className={`app-dropdown--body ${isOpen ? "app-dropdown--body--active" : ""}`}
+        onMouseLeave={toggleDropdown}
+      >
         <AppMenu
           className={menuClassName}
           size={size}

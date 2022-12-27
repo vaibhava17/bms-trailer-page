@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import AppCard from '../components/AppCard/AppCard';
-import movies from '../data/movies.data';
+import { movies } from '../data/movies.data';
 
 let data = movies[0];
 
