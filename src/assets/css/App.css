@@ -46,6 +46,7 @@ body {
 .flex-grid {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .app-loader {
@@ -94,12 +95,6 @@ body {
 
 .no-data i {
   font-size: 5rem;
-}
-
-/* Section */
-
-.section {
-  padding: 60px 0;
 }
 
 /* Navbar */
@@ -428,6 +423,7 @@ body {
   position: relative;
   width: 100%;
   max-width: 300px;
+  min-width: 280px;
   height: 374px;
   background-size: cover;
   background-position: center;
@@ -442,18 +438,6 @@ body {
   border-top-left-radius: calc(0.25rem - 1px);
   border-top-right-radius: calc(0.25rem - 1px);
   position: relative;
-}
-
-.app-card--image img::before {
-  content: '';
-  width: 100%;
-  height: 100%;
-  background-color: #ccc;
-  border-radius: calc(0.25rem - 1px);
-  position: absolute;
-  top: 50%;
-  left: -2px;
-  transform: translateY(-50%);
 }
 
 .app-card--overlay {

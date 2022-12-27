@@ -11,7 +11,12 @@ const AppCard = (props) => {
   return (
     <div className="app-card" onClick={onClick} {...otherProps}>
       <div className='app-card--image'>
-        <img src={data.EventImageUrl} alt={data.EventTitle} className="app-card--image-placeholder" />
+        <img
+          src={data.EventImageUrl}
+          alt={data.EventTitle}
+          className="app-card--image-placeholder"
+          loading='lazy'
+        />
         <div className='app-card--overlay'>
           <span>{moment(data.DispReleaseDate).format(DATE_FORMAT)}</span>
           <i className='fas fa-play-circle' />

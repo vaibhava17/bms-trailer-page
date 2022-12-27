@@ -42,6 +42,13 @@ const AppMenu = (props) => {
               <AppCheckbox
                 values={checkedValues}
                 value={option.value}
+                onChange={(e) => {
+                  if (checkedValues.includes(option.value)) {
+                    setCheckedValues(checkedValues.filter(value => value !== option.value))
+                  } else {
+                    setCheckedValues([...checkedValues, option.value])
+                  }
+                }}
               />}
             <span>
               {option.label}

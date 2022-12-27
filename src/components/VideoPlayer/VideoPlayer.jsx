@@ -7,8 +7,8 @@ const VideoPlayer = () => {
         className='video--player'
         src="https://www.youtube.com/embed/2g811Eo7K8U"
         id="player"
-        frameborder="0"
-        allowfullscreen="1"
+        frameBorder="0"
+        allowFullScreen="1"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         title="BADASS RAVIKUMAR | Title Announcement Teaser | Himesh Reshammiya | The Xposé Universe"
         width="100%"
@@ -69,7 +69,7 @@ const VideoPlayer = () => {
           <div className='cast--list'>
             <div className='cast-slider'>
               <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
+                <img loading='lazy' src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
                 <div className='cast--name'>
                   Himesh Reshammiya
                 </div>
