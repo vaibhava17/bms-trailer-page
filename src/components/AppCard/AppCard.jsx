@@ -5,10 +5,11 @@ import { DATE_FORMAT } from '../../constants'
 const AppCard = (props) => {
   const {
     data,
-    onClick
+    onClick,
+    ...otherProps
   } = props
   return (
-    <div className="app-card" onClick={onClick}>
+    <div className="app-card" onClick={onClick} {...otherProps}>
       <div className='app-card--image'>
         <img src={data.EventImageUrl} alt={data.EventTitle} className="app-card--image-placeholder" />
         <div className='app-card--overlay'>
