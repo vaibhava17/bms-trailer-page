@@ -21,6 +21,13 @@
 }
 
 /* Global */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+}
+
 body {
   position: relative;
   height: 100vh;
@@ -109,20 +116,13 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  height: 60px;
+  height: 40px;
   margin: 0 auto;
 }
 
-.navbar .logo {
-  font-size: var(--font-size-3);
-  font-weight: var(--font-weight-3);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--primary-color);
-}
-
-.navbar .logo span {
-  color: var(--secondary-color);
+.navbar .navbar__logo a {
+  align-items: center;
+  display: flex;
 }
 
 .navbar .navbar__search {
@@ -131,13 +131,12 @@ body {
   justify-content: space-between;
   width: 100%;
   max-width: 300px;
-  padding: 10px 20px;
   position: relative;
 }
 
 .navbar .navbar__search .search__icon {
   position: absolute;
-  left: 30px;
+  left: 10px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--quaternary-color);
@@ -242,6 +241,8 @@ body {
 .app-dropdown--text {
   width: 80px;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .app-dropdown--text span {
@@ -279,9 +280,9 @@ body {
   top: 95%;
   left: 0;
   z-index: 1;
-  display: none;
-  min-width: 100px;
-  max-width: 100px;
+  display: none;    
+  min-width: 140px;
+  max-width: 140px;
   padding: 10px 20px;
   margin: 2px 0 0;
   font-size: var(--font-size-2);
@@ -531,15 +532,15 @@ body {
   align-items: center;
   justify-content: center;
   height: 100%;
+  width: 100%;
   padding: 15px;
 }
-
 
 .app-video-player iframe {
   width: 60%;
   height: 100%;
   float: left;
-  height: 390px;
+  min-height: 400px;
 }
 
 .app-video-player .video--details {
@@ -551,6 +552,7 @@ body {
   margin-left: 2%;
   background-color: #fff;
   border: 1px solid grey;
+  min-height: 400px;
 }
 
 .app-video-player .video--details .info {
@@ -671,4 +673,24 @@ body {
   font-size: var(--font-size-3);
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .app-video-player {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
+
+  .app-video-player iframe {
+    width: 100%;
+    height: 300px;
+    min-height: 200px;
+  }
+
+  .app-video-player .video--details {
+    width: 100%;
+    margin-left: 0;
+    min-height: 200px;
+  }
 }

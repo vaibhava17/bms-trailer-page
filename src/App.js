@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { debounce } from 'lodash';
 import './assets/css/App.css';
 import Navbar from './components/Navbar/Navbar';
@@ -7,18 +7,20 @@ import AppDropdown from './components/AppDropdown/AppDropdown';
 import AppLoader from './components/AppLoader/AppLoader';
 import AppTag from './components/AppTag/AppTag';
 import VideoPlayer from './components/VideoPlayer/VideoPlayer';
-import { get } from './utils/api';
 import { API_URL, DEBOUNCE_TIME } from './constants';
-
-// TODO: card on click should open video player
+import { indexCount, get } from './utils/hooks';
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [searchValue, setSearchValue] = useState('');
+  const [selectedMovie, setSelectedMovie] = useState(undefined);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [count, setCount] = useState(4);
   const [selectedLanguage, setSelectedLanguage] = useState([]);
   const [displayMovies, setDisplayMovies] = useState([]);
   const [movies, setMovies] = useState([]);
   const [LanguageList, setLanguageList] = useState([]);
+  const playerRef = useRef(null);
 
   // Debounce search with 500ms
   const debounceSearch = useCallback(debounce(value => {
@@ -66,10 +68,38 @@ function App() {
     return { value: language, label: language };
   });
 
+  // Change count on window resize
+  useEffect(() => {
+    function handleResize() {
+      if (window.innerWidth < 616) {
+        setCount(1);
+      } else if (window.innerWidth < 942) {
+        setCount(2);
+      } else if (window.innerWidth < 1250) {
+        setCount(3);
+      } else {
+        setCount(4);
+      }
+    }
+    window.addEventListener('resize', handleResize);
+    handleResize();
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // get video player scroll in to view
+  useEffect(() => {
+    if (activeIndex !== null) {
+      playerRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [activeIndex]);
+
   return (
     <div className="App">
       <Navbar
-        onSearch={(value) => debounceSearch(value)}
+        onSearch={(value) => {
+          debounceSearch(value);
+          setSelectedMovie(undefined);
+        }}
       />
       <div className="container">
         <div className="filter">
@@ -80,6 +110,7 @@ function App() {
                   key={index}
                   label={language}
                   onClick={(label) => {
+                    setSelectedMovie(undefined);
                     setSelectedLanguage(selectedLanguage.filter((language) => language !== label));
                   }}
                 />
@@ -90,6 +121,7 @@ function App() {
             options={languageOptions}
             placeholder="All Language"
             onChange={(e, options) => {
+              setSelectedMovie(undefined);
               if (selectedLanguage.includes(options.value)) {
                 setSelectedLanguage(selectedLanguage.filter((language) => language !== options.value));
               } else {
@@ -99,16 +131,31 @@ function App() {
             checkbox
           />
         </div>
-        <VideoPlayer />
         <div className="flex-grid">
           {loading ? <AppLoader /> : (displayMovies.length > 0 ? displayMovies.map((movie, index) => {
             return (
-              <div className="col" key={index}>
-                <AppCard
-                  data={movie}
-                  onClick={() => console.log('clicked', movie)}
-                />
-              </div>
+              <>
+                {selectedMovie && index === (indexCount(activeIndex, count)) && (
+                  <VideoPlayer
+                    playerRef={playerRef}
+                    data={selectedMovie}
+                    onClose={() => {
+                      setSelectedMovie(undefined);
+                      setActiveIndex(null)
+                    }}
+                  />
+                )}
+                <div key={index}>
+                  <AppCard
+                    id={`card-${index}`}
+                    data={movie}
+                    onClick={() => {
+                      setSelectedMovie(movie);
+                      setActiveIndex(index)
+                    }}
+                  />
+                </div>
+              </>
             );
           }) : (
             <div className="no-data">

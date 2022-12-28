@@ -1,11 +1,22 @@
-import React from 'react'
-// TODO - Add a prop to hide the video details and responsive
-const VideoPlayer = () => {
+import React, { useEffect, useState } from 'react'
+import moment from 'moment';
+import { getVideoId } from '../../utils/hooks'
+
+const VideoPlayer = (props) => {
+  const { data, playerRef, ...rest } = props;
+  const [videoId, setVideoId] = useState('')
+
+  console.log('data', data)
+
+  useEffect(() => {
+    setVideoId(getVideoId(data.TrailerURL))
+  }, [data]);
+
   return (
-    <div className='app-video-player'>
+    <div className='app-video-player' {...rest} ref={playerRef}>
       <iframe
         className='video--player'
-        src="https://www.youtube.com/embed/2g811Eo7K8U"
+        src={`https://www.youtube.com/embed/${videoId}`}
         id="player"
         frameBorder="0"
         allowFullScreen="1"
@@ -18,98 +29,34 @@ const VideoPlayer = () => {
       <div className="video--details">
         <div className='info'>
           <div className='name'>
-            Hello Name
+            {data?.EventTitle}
           </div>
           <div className='language'>
             <span>
-              English
+              {data?.EventLanguage}
             </span>
           </div>
           <div className='genre'>
-            <span>
-              Action
-            </span>
-            <span>
-              Triller
-            </span>
+            {data.EventGenre.split('|').map((genre, index) => (
+              <span key={index}>
+                {genre}
+              </span>
+            ))}
           </div>
         </div>
         <div className='stats'>
           <div className='thumbs-up'>
             <i className='fas fa-thumbs-up'></i>
             <div className='content'>
-              <span>0%</span>
-              <span>0 Vote</span>
+              <span>{`${data.avgRating}%`}</span>
+              <span>{data.dwtsCount} Vote</span>
             </div>
           </div>
           <div className='date'>
             <i className='fas fa-calendar'></i>
             <div className='content'>
-              <span>0%</span>
-              <span>0 Vote</span>
-            </div>
-          </div>
-        </div>
-        <div className='review'>
-          <blockquote>
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-            thel jgvagc  ajsjhavnnm
-          </blockquote>
-        </div>
-        <div className='cast'>
-          <div className='cast--title'>
-            Cast
-          </div>
-          <div className='cast--list'>
-            <div className='cast-slider'>
-              <div className='cast--item'>
-                <img loading='lazy' src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
-              <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
-              <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
-              <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
-              <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
-              <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
-              <div className='cast--item'>
-                <img src="https://in.bmscdn.com/iedb/artist/images/website/poster/large/himesh-reshammiya-820-24-03-2017-12-29-19.jpg" alt='cast' />
-                <div className='cast--name'>
-                  Himesh Reshammiya
-                </div>
-              </div>
+              <span>{moment(data.DispReleaseDate).format('MMM DD')}</span>
+              <span>{moment(data.DispReleaseDate).format('YYYY')}</span>
             </div>
           </div>
         </div>
